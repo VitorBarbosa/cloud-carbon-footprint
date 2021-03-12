@@ -39,16 +39,20 @@ yarn start-with-mock-data
 This will run the webapp in development mode, using a mocked server. Open http://localhost:3000 to view it in a browser.
 
 ### Running the web-app with real data
-Make sure you have configured your GCP and AWS credentials (see [AWS Authentication](#aws-authentication))
-
-The application requires a number of environment variables to be set in the `packages/api/.env` file. See [packages/api/.env.template](packages/api/.env.template) for a template .env file. Rename this file as .env, optionally remove the comments and then set the environment variables.
-
-By default, the server has configuration for both AWS and GCP. If you are only using one of these cloud providers, you can remove the environment variables associated with the other cloud provider in your `packgages/api/.env` file.
-
+A few steps are required to run the app with real data. Essentially, the application needs to authenticate with aws, and query your account's cost and usage reports. To do so, you need to ensure
+1. Ensure you have an aws account, and an [IAM user](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key/) with permissions to query your Cost and Billing Usage 
+1. Your account has enabled the Cost and Usage Billing feature
+This feature needs to be enabled so we can start querying our usage data. This is enabled by going to your account billing section, and clicking on the "Cost and Usage Reports" tab. General docs about Cost and Usage Reports [here](https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html).
+1. You've set up Athena DB to query the Cost and Usage Reports and save the data in a particular format 
+[Guide Here](https://docs.aws.amazon.com/cur/latest/userguide/cur-query-athena.html)
+1. You have aws-cli, to set up local authentication
+- After [installing awscli](#optional-prerequisites), run `aws configure` and provide your access key and secret access key. Also make sure you select the same region as the one you created your cost and usage reports in. 
+- Specify the services and regions that the tool runs on in [packages/core/src/application/Config.ts](packages/core/src/application/Config.ts), for these instructions, change GCP to AWS.
+1. Environmental variables are configured correctly for client and api.
+See [packages/api/.env.template](packages/api/.env.template) for a template .env file. Rename this file as .env, optionally remove the comments and then set the environment variables. By default, the api has configuration for both AWS and GCP. If you are only using one of these cloud providers, you can remove the environment variables associated with the other cloud provider in your `packgages/api/.env` file.
 There is also a `packages/client/.env` file that is required to be set if the application is being deployed behind Okta. See [client/.env.template](packages/client/.env.template) for a template. Rename this file as .env, optionally remove the comments and then set the environment variables.
-
 By default, the client uses both AWS and GCP. If you are only using one of these cloud providers, please update the `appConfig` object in the [client Config file](packages/client/src/Config.ts) to only include your provider in the `CURRENT_PROIVDERS` array.
-
+1. Finally, start up the application
 ```
 yarn start
 ```
