@@ -39,7 +39,7 @@ yarn start-with-mock-data
 This will run the webapp in development mode, using a mocked server. Open http://localhost:3000 to view it in a browser.
 
 ### Running the web-app with real data
-A few steps are required to run the app with real data. Essentially, the application needs to authenticate with aws and query your account's cost and usage reports. To do so, you need to ensure
+A few steps are required to run the app with real data. Essentially, your aws account needs to be configured to generate cost and usage reports and save those reports to a database, and the application needs to authenticate with aws and run queries on that database.
 1. Ensure you have an aws account and an [IAM user](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key/) that can create access-keys and modify your billing settings.
 1. Your account has enabled the Cost and Usage Billing AWS feature.
     - This feature needs to be enabled so your account can start generating cost and usage reports. To enable, navigate to your account's billing section, and click on the "Cost and Usage Reports" tab. Reference Cost and Usage Reports documentation [here](https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html).
