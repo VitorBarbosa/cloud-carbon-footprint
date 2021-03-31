@@ -38,6 +38,7 @@ export interface CCFConfig {
     BIG_QUERY_TABLE?: string
     BILLING_ACCOUNT_ID?: string
     BILLING_ACCOUNT_NAME?: string
+    GCS_CACHE_BUCKET_NAME?: string
   }
   AZURE?: {
     USE_BILLING_DATA?: boolean
@@ -50,6 +51,7 @@ export interface CCFConfig {
   }
   LOGGING_MODE?: string
   GROUP_QUERY_RESULTS_BY?: string
+  CACHE_MODE?: string
 }
 
 const getAWSAccounts = () => {
