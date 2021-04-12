@@ -1,5 +1,11 @@
 # @cloud-carbon-footprint/client
 
+## 0.5.1
+
+### Patch Changes
+
+- 58064ebd: fixes unknown region display name
+
 ## 0.5.0
 
 ### Minor Changes
